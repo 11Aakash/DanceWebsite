@@ -1,0 +1,28 @@
+> use akscart
+> db.items.insertOne({name:"Samsung 30s",price:22000,rating:4.5,qty:233,sold:98})
+
+ db.items.insertMany([{name:"Samsung 30s",price:22000,rating:4.5,qty:233,sold:98},
+ {name:"Moto 30s",price:20000,rating:4.4,qty:244,sold:112}])
+
+ > db.items.find()
+
+ //Searching/Querying data from mongo db
+ > db.items.find({rating:4.4})      //this qyery will return all the object with rating equal to 4.4
+ > db.items.find({rating:{$gte:4.4}})
+ db.items.find({rating:{$gte:4.4},price:{$gt:5000}})
+
+//Or
+  db.items.find({$or:[{rating:{$gte:4.4}},{price:{$gt:5000}}]})
+
+   db.items.find({rating:4.4},{rating:1,qty:1})
+
+
+
+//Deleting data from mongo db
+
+ db.items.deleteOne({price:22000})     //this will delete first entry in case of multi document match
+  db.items.deleteMany({price:22000})  //this will dlete all entry which are match
+
+  //Updtate data
+  db.items.updateOne({name:"Moto 30s"},{$set:{price:100}})
+  db.items.updateMany({name:"Moto 30s"},{$set:{price:5,rating:1}})
